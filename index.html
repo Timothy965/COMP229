@@ -127,6 +127,23 @@
                 <!-- End Right Column -->
             </div>
 
+            <script type="text/javascript" src="jquery-1.5.1.js"></script>
+            <script type="text/javascript">
+    $(document).ready(function() {
+            var symbol='goog';
+            var callback = function(data) {
+                    var price=data.query.results.span[0].content;
+                    alert('Stock Price: ' + price);
+                };
+
+        var url = 'https://ca.finance.yahoo.com/quote/L.TO/?guccounter=1&guce_referrer=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8&guce_referrer_sig=AQAAANJy7VDS0BMkfp6mRsrzPrA2NQxhfE_tIQv8qPTdmDWm3lKeDzjjQC6YuIPwNsjroInxgfDMhco-pXQ_yvewH6q_5JuVIGdygGdYlU3W3x2tuRzdneuP-gjw2EPsJzSQCiSh9jR3LxaPiUwIbYu1k_q-wWDRC5ZyshJrknDGOD8A';
+            // this is the lovely YQL query (html encoded) which lets us get the stock price:
+            // select * from html where url="http://finance.yahoo.com/q?s=goog" and xpath='//span[@id="yfs_l10_goog"]'
+            var data = "q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Ffinance.yahoo.com%2Fq%3Fs%3D" + symbol + "%22%20and%20xpath%3D'%2F%2Fspan%5B%40id%3D%22yfs_l10_" + symbol + "%22%5D'&format=json";
+            $.getJSON(url, data, callback);
+    });
+            </script>
+
             <!-- End Grid -->
         </div>
 
